@@ -201,8 +201,13 @@ struct EmojiData {
         "😘", "😗", "😙", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "🥸",
         "🤩", "🥳", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩",
         "🥺", "😢", "😭", "😤", "😠", "😡", "🤬", "🤯", "😳", "🥵", "🥶", "😱", "😨", "😰",
-        "😥", "😓", "🤗", "🤔", "🤭", "🤫", "🤥", "😶", "😐", "😑", "😬", "🙄", "😯", "😦",
-        "😧", "😮", "😲", "🥱", "😴", "🤤", "😪", "😵", "🤐", "🥴", "🤢", "🤮", "🤧", "😷"
+        "😥", "😓", "🤗", "🤔", "🤭", "🤫", "🫢", "🫣", "🤥", "😶", "😐", "😑", "😬", "🙄",
+        "😯", "😦", "😧", "😮", "😲", "🥱", "😴", "🤤", "😪", "😵", "🤐", "🥴", "🤢", "🤮",
+        "🤧", "😷", "😈", "🙊", "🙉", "🙈"
+    ]
+    
+    static let foodAndDrink = [
+        "🍆", "🍉", "🥖", "🍕", "🍔", "🥩", "🍗", "🍟", "🍦", "🍭"
     ]
     
     static let heartsAndLove = [
@@ -220,6 +225,7 @@ struct EmojiData {
     static let categories: [(String, [String])] = [
         ("Recent", []),
         ("Smileys & People", smileysAndPeople),
+        ("Food & Drink", foodAndDrink),
         ("Hearts & Love", heartsAndLove),
         ("Gestures & Body", gesturesAndBody)
     ]
@@ -264,10 +270,9 @@ struct EmojiCategoryView: View {
                 .padding(.top, 4)
             
             let emojis = category.0 == "Recent" ? recentEmojis : category.1
-            let displayEmojis = category.0 == "Recent" ? emojis : Array(emojis.prefix(27))
             
             EmojiGridView(
-                emojis: displayEmojis,
+                emojis: emojis,
                 onSelect: onSelect,
                 addToRecent: addToRecent
             )

@@ -130,22 +130,6 @@ struct AppearanceSettingsPane: View {
         }
         .help(Text("ShowSpecialSymbolsTooltip", tableName: "AppearanceSettings"))
 
-        HStack {
-          Defaults.Toggle(key: .showInStatusBar) {
-            Text("ShowMenuIcon", tableName: "AppearanceSettings")
-          }
-
-          Picker("", selection: $menuIcon) {
-            ForEach(MenuIcon.allCases) { icon in
-              Image(nsImage: icon.image)
-            }
-          }
-          .labelsHidden()
-          .scaledToFit()
-          .disabled(!showInStatusBar)
-          .controlSize(.small)
-        }
-
         Defaults.Toggle(key: .showRecentCopyInMenuBar) {
           Text("ShowRecentCopyInMenuBar", tableName: "AppearanceSettings")
         }
@@ -163,9 +147,6 @@ struct AppearanceSettingsPane: View {
           .scaledToFit()
           .disabled(!showSearch)
           .controlSize(.small)
-        }
-        Defaults.Toggle(key: .showTitle) {
-          Text("ShowTitleBeforeSearchField", tableName: "AppearanceSettings")
         }
         Defaults.Toggle(key: .showApplicationIcons) {
           Text("ShowApplicationIcons", tableName: "AppearanceSettings")
