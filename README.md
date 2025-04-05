@@ -1,15 +1,10 @@
 
-<img width="128px" src="https://maccy.app/img/maccy/Logo.png" alt="Logo" align="left" />
-
-# [Maccy](https://maccy.app)
-
-[![Downloads](https://img.shields.io/github/downloads/p0deje/Maccy/total.svg)](https://github.com/p0deje/Maccy/releases/latest)
-[![Build Status](https://img.shields.io/bitrise/716921b669780314/master?token=3pMiCb5dpFzlO-7jTYtO3Q)](https://app.bitrise.io/app/716921b669780314)
+ClipJoy is a fork of [Maccy](https://maccy.app), which I loved for its sleek and fast clipboard history management.
 
 Maccy is a lightweight clipboard manager for macOS. It keeps the history of what you copy
 and lets you quickly navigate, search, and use previous clipboard contents.
 
-Maccy works on macOS Sonoma 14 or higher.
+ClipJoy works on macOS Sonoma 14 or higher.
 
 <!-- vim-markdown-toc GFM -->
 
@@ -41,15 +36,11 @@ Maccy works on macOS Sonoma 14 or higher.
 
 ## Install
 
-Download the latest version from the [releases](https://github.com/p0deje/Maccy/releases/latest) page, or use [Homebrew](https://brew.sh/):
-
-```sh
-brew install maccy
-```
+Download the latest version from the [releases](https://github.com/sourceprojects/Clipboard/releases/latest) page.
 
 ## Usage
 
-1. <kbd>SHIFT (⇧)</kbd> + <kbd>COMMAND (⌘)</kbd> + <kbd>C</kbd> to popup Maccy or click on its icon in the menu bar.
+1. <kbd>SHIFT (⇧)</kbd> + <kbd>COMMAND (⌘)</kbd> + <kbd>C</kbd> to popup ClipJoy or click on its icon in the menu bar.
 2. Type what you want to find.
 3. To select the history item you wish to copy, press <kbd>ENTER</kbd>, or click the item, or use <kbd>COMMAND (⌘)</kbd> + `n` shortcut.
 4. To choose the history item and paste, press <kbd>OPTION (⌥)</kbd> + <kbd>ENTER</kbd>, or <kbd>OPTION (⌥)</kbd> + <kbd>CLICK</kbd> the item, or use <kbd>OPTION (⌥)</kbd> + `n` shortcut.
@@ -58,15 +49,16 @@ brew install maccy
 7. To see the full text of the history item, wait a couple of seconds for tooltip.
 8. To pin the history item so that it remains on top of the list, press <kbd>OPTION (⌥)</kbd> + <kbd>P</kbd>. The item will be moved to the top with a random but permanent keyboard shortcut. To unpin it, press <kbd>OPTION (⌥)</kbd> + <kbd>P</kbd> again.
 9. To clear all unpinned items, select _Clear_ in the menu, or press <kbd>OPTION (⌥)</kbd> + <kbd>COMMAND (⌘)</kbd> + <kbd>DELETE (⌫)</kbd>. To clear all items including pinned, select _Clear_ in the menu with  <kbd>OPTION (⌥)</kbd> pressed, or press <kbd>SHIFT (⇧)</kbd> + <kbd>OPTION (⌥)</kbd> + <kbd>COMMAND (⌘)</kbd> + <kbd>DELETE (⌫)</kbd>.
-10. To disable Maccy and ignore new copies, click on the menu icon with <kbd>OPTION (⌥)</kbd> pressed.
+10. To disable ClipJoy and ignore new copies, click on the menu icon with <kbd>OPTION (⌥)</kbd> pressed.
 11. To ignore only the next copy, click on the menu icon with <kbd>OPTION (⌥)</kbd> + <kbd>SHIFT (⇧)</kbd> pressed.
 12. To customize the behavior, check "Preferences…" window, or press <kbd>COMMAND (⌘)</kbd> + <kbd>,</kbd>.
+13. To use the emoji picker, popup ClipJoy, and click on the emoji icon on the right of the search field.
 
 ## Advanced
 
 ### Ignore Copied Items
 
-You can tell Maccy to ignore all copied items:
+You can tell ClipJoy to ignore all copied items:
 
 ```sh
 defaults write org.p0deje.Maccy ignoreEvents true # default is false
@@ -78,7 +70,7 @@ You can also click the menu icon with <kbd>OPTION (⌥)</kbd> pressed. To ignore
 
 ### Ignore Custom Copy Types
 
-By default Maccy will ignore certain copy types that are considered to be confidential
+By default ClipJoy will ignore certain copy types that are considered to be confidential
 or temporary. The default list always include the following types:
 
 * `org.nspasteboard.TransientType`
@@ -98,65 +90,35 @@ You can add additional custom types using settings.
 To find what custom types are used by an application, you can use
 free application [Pasteboard-Viewer](https://github.com/sindresorhus/Pasteboard-Viewer).
 Simply download the application, open it, copy something from the application you
-want to ignore and look for any custom types in the left sidebar. [Here is an example
-of using this approach to ignore Adobe InDesign](https://github.com/p0deje/Maccy/issues/125).
-
-### Speed up Clipboard Check Interval
-
-By default, Maccy checks clipboard every 500 ms, which should be enough for most users. If you want
-to speed it up, you can change it with `defaults`:
-
-```sh
-defaults write org.p0deje.Maccy clipboardCheckInterval 0.1 # 100 ms
-```
+want to ignore and look for any custom types in the left sidebar.
 
 ## FAQ
 
 ### Why doesn't it paste when I select an item in history?
 
 1. Make sure you have "Paste automatically" enabled in Preferences.
-2. Make sure "Maccy" is added to System Settings -> Privacy & Security -> Accessibility.
+2. Make sure "ClipJoy" is added to System Settings -> Privacy & Security -> Accessibility.
 
-### When assigning a hotkey to open Maccy, it says that this hotkey is already used in some system setting.
+### When assigning a hotkey to open ClipJoy, it says that this hotkey is already used in some system setting.
 
 1. Open System settings -> Keyboard -> Keyboard Shortcuts.
 2. Find where that hotkey is used. For example, "Convert text to simplified Chinese" is under Services -> Text.
-3. Disable that hotkey or remove assigned combination ([screenshot](https://github.com/p0deje/Maccy/assets/576152/446719e6-c3e5-4eb0-95fb-5a811066487f)).
-4. Restart Maccy.
-5. Assign hotkey in Maccy settings.
-
-### How to restore hidden footer?
-
-1. Open Maccy window.
-2. Press <kbd>COMMAND (⌘)</kbd> + <kbd>,</kbd> to open preferences.
-3. Enable footer in Appearance section.
-
-If for some reason it doesn't work, run the following command in Terminal.app:
-
-```sh
-defaults write org.p0deje.Maccy showFooter 1
-```
+3. Disable that hotkey or remove assigned combination.
+4. Restart ClipJoy.
+5. Assign hotkey in ClipJoy settings.
 
 ### How to ignore copies from [Universal Clipboard](https://support.apple.com/en-us/102430)?
 
 1. Open Preferences -> Ignore -> Pasteboard Types.
 2. Add `com.apple.is-remote-clipboard`.
 
-## Translations
-
-The translations are hosted in [Weblate](https://hosted.weblate.org/engage/maccy/).
-You can use it to suggest changes in translations and localize the application to a new language.
-
-[![Translation status](https://hosted.weblate.org/widget/maccy/multi-auto.svg)](https://hosted.weblate.org/engage/maccy/)
-
 ## Motivation
 
-There are dozens of similar applications out there, so why build another?
-Over the past years since I moved from Linux to macOS, I struggled to find
-a clipboard manager that is as free and simple as [Parcellite](http://parcellite.sourceforge.net),
-but I couldn't. So I've decided to build one.
+My Mac's emoji picker suddenly stopped working all of a sudden, and I couldn't call it reliably. Irked, I went to look for a solution and couldn't find anything.
 
-Also, I wanted to learn Swift and get acquainted with macOS application development.
+That's when I decided that I should just create my app, and since Maccy was something that I used on a daily basis, I thought it might be a great idea to enhance Maccy with an emoji picker.
+
+Like Alex Rodionov, the creator of Maccy, I wanted to learn Swift and get acquainted with macOS application development.
 
 
 ## License
