@@ -33,6 +33,12 @@
 	<key>SUEnableInstallerLauncherService</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string></string>
+	<string>https://raw.githubusercontent.com/YOUR_USERNAME/ClipJoy/main/appcast.xml</string>
+	<key>SUAllowsAutomaticUpdates</key>
+	<true/>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUPublicEDKey</key>
+	<string>LEAVE_EMPTY_FOR_UNSIGNED_UPDATES</string>
 </dict>
 </plist>
