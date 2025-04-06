@@ -14,6 +14,8 @@ struct GeneralSettingsPane: View {
   @State private var updateAvailable = false
   @State private var updateURL: String?
   @State private var releaseNotes: String?
+  @State private var showNoUpdateAlert = false
+  @State private var lastCheckTime: Date?
 
   @State private var copyModifier = HistoryItemAction.copy.modifierFlags.description
   @State private var pasteModifier = HistoryItemAction.paste.modifierFlags.description
@@ -26,28 +28,40 @@ struct GeneralSettingsPane: View {
           Text("LaunchAtLogin", tableName: "GeneralSettings")
         }
         
-        Button(action: checkForUpdates) {
-          if isCheckingForUpdates {
-            Text("CheckingForUpdates", tableName: "GeneralSettings")
-          } else {
-            Text("CheckForUpdates", tableName: "GeneralSettings")
+        VStack(alignment: .leading, spacing: 8) {
+          Button(action: checkForUpdates) {
+            HStack {
+              if isCheckingForUpdates {
+                ProgressView()
+                  .scaleEffect(0.7)
+                  .frame(width: 16, height: 16)
+                Text("CheckingForUpdates", tableName: "GeneralSettings")
+              } else {
+                Text("CheckForUpdates", tableName: "GeneralSettings")
+              }
+            }
           }
-        }
-        .disabled(isCheckingForUpdates)
-        .onAppear {
-          print("Current version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")")
+          .disabled(isCheckingForUpdates)
+          
+          if let time = lastCheckTime {
+            Text("Last checked: \(time, style: .relative)")
+              .font(.caption)
+              .foregroundColor(.secondary)
+          }
         }
         
         if updateAvailable, let url = updateURL, let notes = releaseNotes {
           VStack(alignment: .leading, spacing: 8) {
             Text("UpdateAvailable", tableName: "GeneralSettings")
               .foregroundColor(.green)
+              .bold()
             Text(notes)
               .font(.caption)
               .foregroundColor(.secondary)
             Link("DownloadUpdate", destination: URL(string: url)!)
+              .buttonStyle(.borderedProminent)
           }
-          .padding(.top, 4)
+          .padding(.vertical, 8)
         }
       }
 
@@ -113,6 +127,11 @@ struct GeneralSettingsPane: View {
         }
       }
     }
+    .alert("No Update Available", isPresented: $showNoUpdateAlert) {
+      Button("OK", role: .cancel) { }
+    } message: {
+      Text("You're running the latest version (\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"))")
+    }
   }
 
   private func refreshModifiers(_ sender: Sendable) {
@@ -131,6 +150,11 @@ struct GeneralSettingsPane: View {
         updateAvailable = needsUpdate
         updateURL = url
         releaseNotes = notes
+        lastCheckTime = Date()
+        
+        if !needsUpdate {
+          showNoUpdateAlert = true
+        }
       }
     }
   }

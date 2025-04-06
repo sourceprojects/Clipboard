@@ -2,7 +2,7 @@
 "LaunchAtLogin" = "Launch at login";
 "CheckForUpdates" = "Check for updates";
 "CheckingForUpdates" = "Checking for updates...";
-"UpdateAvailable" = "Update available!";
+"UpdateAvailable" = "Update Available!";
 "DownloadUpdate" = "Download Update";
 "Open" = "Open:";
 "OpenTooltip" = "Global shortcut key to open application.\nDefault: ⇧⌘C.";
