@@ -10,12 +10,14 @@ struct GeneralSettingsPane: View {
   )
 
   @Default(.searchMode) private var searchMode
+  @State private var isCheckingForUpdates = false
+  @State private var updateAvailable = false
+  @State private var updateURL: String?
+  @State private var releaseNotes: String?
 
   @State private var copyModifier = HistoryItemAction.copy.modifierFlags.description
   @State private var pasteModifier = HistoryItemAction.paste.modifierFlags.description
   @State private var pasteWithoutFormatting = HistoryItemAction.pasteWithoutFormatting.modifierFlags.description
-
-  @State private var updater = SoftwareUpdater()
 
   var body: some View {
     Settings.Container(contentWidth: 450) {
@@ -23,13 +25,30 @@ struct GeneralSettingsPane: View {
         LaunchAtLogin.Toggle {
           Text("LaunchAtLogin", tableName: "GeneralSettings")
         }
-        Toggle(isOn: $updater.automaticallyChecksForUpdates) {
-          Text("CheckForUpdates", tableName: "GeneralSettings")
+        
+        Button(action: checkForUpdates) {
+          if isCheckingForUpdates {
+            Text("CheckingForUpdates", tableName: "GeneralSettings")
+          } else {
+            Text("CheckForUpdates", tableName: "GeneralSettings")
+          }
         }
-        Button(
-          action: { updater.checkForUpdates() },
-          label: { Text("CheckNow", tableName: "GeneralSettings") }
-        )
+        .disabled(isCheckingForUpdates)
+        .onAppear {
+          print("Current version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")")
+        }
+        
+        if updateAvailable, let url = updateURL, let notes = releaseNotes {
+          VStack(alignment: .leading, spacing: 8) {
+            Text("UpdateAvailable", tableName: "GeneralSettings")
+              .foregroundColor(.green)
+            Text(notes)
+              .font(.caption)
+              .foregroundColor(.secondary)
+            Link("DownloadUpdate", destination: URL(string: url)!)
+          }
+          .padding(.top, 4)
+        }
       }
 
       Settings.Section(label: { Text("Open", tableName: "GeneralSettings") }) {
@@ -100,6 +119,20 @@ struct GeneralSettingsPane: View {
     copyModifier = HistoryItemAction.copy.modifierFlags.description
     pasteModifier = HistoryItemAction.paste.modifierFlags.description
     pasteWithoutFormatting = HistoryItemAction.pasteWithoutFormatting.modifierFlags.description
+  }
+
+  private func checkForUpdates() {
+    print("Check for updates button clicked")
+    isCheckingForUpdates = true
+    VersionChecker.shared.checkForUpdates { needsUpdate, url, notes in
+      print("Update check completed. Needs update: \(needsUpdate), URL: \(url ?? "nil"), Notes: \(notes ?? "nil")")
+      DispatchQueue.main.async {
+        isCheckingForUpdates = false
+        updateAvailable = needsUpdate
+        updateURL = url
+        releaseNotes = notes
+      }
+    }
   }
 }
 
