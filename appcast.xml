@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>ClipJoy</title>
-    <link>https://github.com/YOUR_USERNAME/ClipJoy/releases/latest</link>
+    <link>https://github.com/sourceprojects/ClipJoy/releases/latest</link>
     <description>Most recent changes with links to updates.</description>
     <language>en</language>
     <item>
-      <title>1.0.0</title>
+      <title>0.6.1</title>
       <description>
         <![CDATA[
           <ul>
-            <li>Initial release</li>
+            <li>Version update to 0.6.1</li>
           </ul>
         ]]>
       </description>
       <pubDate>2024-03-26</pubDate>
       <enclosure
-        url="https://github.com/YOUR_USERNAME/ClipJoy/releases/download/v1.0.0/ClipJoy.app.zip"
-        sparkle:version="1"
-        sparkle:shortVersionString="1.0.0"
+        url="https://github.com/sourceprojects/ClipJoy/releases/download/v0.6.1/ClipJoy.app.zip"
+        sparkle:version="3"
+        sparkle:shortVersionString="0.6.1"
         type="application/octet-stream"
         length="0"
       />
