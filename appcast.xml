@@ -6,19 +6,19 @@
     <description>Most recent changes with links to updates.</description>
     <language>en</language>
     <item>
-      <title>0.6.1</title>
+      <title>0.6.2</title>
       <description>
         <![CDATA[
           <ul>
-            <li>Version update to 0.6.1</li>
+            <li>Version update to 0.6.2</li>
           </ul>
         ]]>
       </description>
       <pubDate>2024-03-26</pubDate>
       <enclosure
-        url="https://github.com/sourceprojects/ClipJoy/releases/download/v0.6.1/ClipJoy.app.zip"
-        sparkle:version="3"
-        sparkle:shortVersionString="0.6.1"
+        url="https://github.com/sourceprojects/ClipJoy/releases/download/v0.6.2/ClipJoy.app.zip"
+        sparkle:version="4"
+        sparkle:shortVersionString="0.6.2"
         type="application/octet-stream"
         length="0"
       />
