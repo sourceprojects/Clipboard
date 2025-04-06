@@ -3,7 +3,7 @@ import Foundation
 class VersionChecker {
     static let shared = VersionChecker()
     
-    private let versionURL = URL(string: "https://raw.githubusercontent.com/alvin-ictn/ClipJoy/main/version.json")!
+    private let versionURL = URL(string: "https://raw.githubusercontent.com/sourceprojects/Clipboard/master/ClipJoy/version.json")!
     private let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
     
     func checkForUpdates(completion: @escaping (Bool, String?, String?) -> Void) {
