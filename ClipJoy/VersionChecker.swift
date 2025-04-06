@@ -35,9 +35,9 @@ class VersionChecker {
                 return
             }
             
-            print("Latest version: \(latestVersion)")
+            print("Latest version from JSON: \(latestVersion)")
             let needsUpdate = self.compareVersions(current: self.currentVersion, latest: latestVersion)
-            print("Update needed: \(needsUpdate)")
+            print("Update check result: \(needsUpdate)")
             
             completion(needsUpdate, downloadURL, releaseNotes)
         }
@@ -45,21 +45,30 @@ class VersionChecker {
     }
     
     private func compareVersions(current: String, latest: String) -> Bool {
+        print("\nDetailed version comparison:")
+        print("Comparing current version: \(current) with latest version: \(latest)")
+        
         let currentComponents = current.split(separator: ".").compactMap { Int($0) }
         let latestComponents = latest.split(separator: ".").compactMap { Int($0) }
         
-        print("Comparing versions:")
-        print("Current components: \(currentComponents)")
-        print("Latest components: \(latestComponents)")
+        print("Current version components: \(currentComponents)")
+        print("Latest version components: \(latestComponents)")
         
-        for (current, latest) in zip(currentComponents, latestComponents) {
+        for (index, (current, latest)) in zip(currentComponents, latestComponents).enumerated() {
+            print("Comparing component \(index): current=\(current) vs latest=\(latest)")
             if latest > current {
+                print("Latest version component is greater -> update needed")
                 return true
             } else if latest < current {
+                print("Current version component is greater -> no update needed")
                 return false
             }
+            print("Components are equal, continuing to next component")
         }
         
-        return latestComponents.count > currentComponents.count
+        let result = latestComponents.count > currentComponents.count
+        print("All compared components are equal. Checking length: latest=\(latestComponents.count) vs current=\(currentComponents.count)")
+        print("Final result: \(result ? "update needed" : "no update needed")")
+        return result
     }
 } 
